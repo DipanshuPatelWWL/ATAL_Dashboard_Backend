@@ -12,6 +12,7 @@ const database = require("./config/config")
 
 // const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
 //versel url frontend
+
 const allowedOrigins = ['https://atal-homepage-new-qlkv.vercel.app/', 'https://atal-dashboard-font.vercel.app/'];
 
 const corsOptions = {
