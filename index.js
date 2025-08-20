@@ -4,15 +4,15 @@ const cors = require('cors');
 const faq = require('./routes/faq-Routes')
 const categoryRoutes = require("./routes/category-route");
 const prodcutRoutes = require("./routes/product-routes");
-const review=require('./routes/review-route')
+const review = require('./routes/review-route')
 const serviceRoutes = require("./routes/service-route");
 const app = express();
 require("dotenv").config();
 const database = require("./config/config")
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+// const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
 //versel url frontend
-// const allowedOrigins = ['https://atal-homepage.vercel.app', 'https://atal-dashboard-fontend.vercel.app/login'];
+const allowedOrigins = ['https://atal-homepage-new-qlkv.vercel.app/', 'https://atal-dashboard-font.vercel.app/'];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -46,7 +46,7 @@ app.use('/api', faq);
 app.use("/api", categoryRoutes);
 app.use("/api", prodcutRoutes);
 app.use("/api", serviceRoutes);
-app.use('/api',review)
+app.use('/api', review)
 
 app.listen(4000, () => {
   console.log("server start on Port : 4000");
