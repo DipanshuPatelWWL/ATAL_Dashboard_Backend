@@ -14,7 +14,7 @@ const database = require("./config/config")
 //versel url frontend
 
 
-const allowedOrigins = ['https://atal-homepage-new.vercel.app/', 'https://atal-dashboard-font.vercel.app/'];
+const allowedOrigins = ['https://atal-homepage-new.vercel.app', 'https://atal-dashboard-font.vercel.app'];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
