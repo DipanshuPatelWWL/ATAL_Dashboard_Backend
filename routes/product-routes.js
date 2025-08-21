@@ -3,7 +3,7 @@ const router = express.Router();
 const productController = require("../controller/product-controller");
 
 const upload = require("../middleware/multer"); // make sure multer.js is in middleware folder
-
+const { protect, allowRoles } = require("../middleware/auth-middleware");
 router.post(
     "/addProduct",
     upload.fields([
@@ -11,11 +11,12 @@ router.post(
         { name: "product_lens_image1", maxCount: 1 },
         { name: "product_lens_image2", maxCount: 1 },
     ]),
+    protect, allowRoles("admin"),
     productController.addProduct
 );
 
-router.get("/getAllProduct", productController.getAllProducts);
-router.get("/getProductById/:id", productController.getProductById);
+router.get("/getAllProduct", protect, allowRoles("admin"), productController.getAllProducts);
+router.get("/getProductById/:id", protect, allowRoles("admin"), productController.getProductById);
 
 router.put(
     "/updateProduct/:id",
@@ -24,11 +25,12 @@ router.put(
         { name: "product_lens_image1", maxCount: 1 },
         { name: "product_lens_image2", maxCount: 1 },
     ]),
+    protect, allowRoles("admin"),
     productController.updateProduct
 );
 
-router.delete("/deleteProduct/:id", productController.deleteProduct);
-router.get("/getProducts/:cat_sec/:subCategoryName", productController.getProdcutByCategoryname)
-router.get("/getproductbyid/:id",productController.getProductByid)
+router.delete("/deleteProduct/:id", protect, allowRoles("admin"), productController.deleteProduct);
+router.get("/getProducts/:cat_sec/:subCategoryName", protect, allowRoles("admin"), productController.getProdcutByCategoryname)
+router.get("/getproductbyid/:id", protect, allowRoles("admin"), productController.getProductByid)
 
 module.exports = router;
