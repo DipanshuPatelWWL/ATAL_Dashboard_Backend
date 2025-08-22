@@ -5,6 +5,6 @@ const router = express.Router();
 const { protect, allowRoles } = require("../middleware/auth-middleware");
 
 router.post("/createreviews", protect, allowRoles("admin"), upload.single("image"), createReview);
-router.get('/getreview', protect, allowRoles("admin"), getReviews);
+router.get('/getreview', getReviews);
 router.put("/updatereviews/:id", protect, allowRoles("admin"), upload.single("image"), updateReview);
 module.exports = router;

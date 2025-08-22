@@ -6,7 +6,7 @@ const { protect, allowRoles } = require("../middleware/auth-middleware");
 
 // router.post("/addcategory",upload.single("categoryImage"),addCategory);
 router.post("/addcategory", protect, allowRoles("admin"), addCategory);
-router.get("/getcategories", protect, allowRoles("admin"), getCategories);
+router.get("/getcategories", getCategories);
 router.delete("/deletecategory/:id", protect, allowRoles("admin"), deleteCategory);
 router.put("/updatecategory/:id", upload.single("categoryImage"), protect, allowRoles("admin"), updateCategory);
 

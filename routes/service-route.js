@@ -5,6 +5,6 @@ const { createService, getServices } = require("../controller/service-controller
 const { protect, allowRoles } = require("../middleware/auth-middleware");
 
 router.post("/createservice", protect, allowRoles("admin"), createService);
-router.get("/getservices", protect, allowRoles("admin"), getServices);
+router.get("/getservices", getServices);
 
 module.exports = router;

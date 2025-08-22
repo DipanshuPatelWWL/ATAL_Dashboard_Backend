@@ -15,8 +15,8 @@ router.post(
     productController.addProduct
 );
 
-router.get("/getAllProduct", protect, allowRoles("admin"), productController.getAllProducts);
-router.get("/getProductById/:id", protect, allowRoles("admin"), productController.getProductById);
+router.get("/getAllProduct", productController.getAllProducts);
+router.get("/getProductById/:id", productController.getProductById);
 
 router.put(
     "/updateProduct/:id",
@@ -30,7 +30,7 @@ router.put(
 );
 
 router.delete("/deleteProduct/:id", protect, allowRoles("admin"), productController.deleteProduct);
-router.get("/getProducts/:cat_sec/:subCategoryName", protect, allowRoles("admin"), productController.getProdcutByCategoryname)
-router.get("/getproductbyid/:id", protect, allowRoles("admin"), productController.getProductByid)
+router.get("/getProducts/:cat_sec/:subCategoryName", productController.getProdcutByCategoryname)
+router.get("/getproductbyid/:id", productController.getProductByid)
 
 module.exports = router;

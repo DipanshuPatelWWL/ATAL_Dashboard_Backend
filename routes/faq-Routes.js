@@ -5,7 +5,7 @@ const { createFAQ, getAllFAQs, deletefaq, updatefaq } = require("../controller/f
 const { protect, allowRoles } = require("../middleware/auth-middleware");
 
 router.post('/createfaq', protect, allowRoles("admin"), createFAQ);
-router.get('/getallfaq', protect, allowRoles("admin"), getAllFAQs);
+router.get('/getallfaq', getAllFAQs);
 router.delete('/deletefaq/:id', protect, allowRoles("admin"), deletefaq)
 router.put('/updatefaq/:id', protect, allowRoles("admin"), updatefaq)
 module.exports = router;
