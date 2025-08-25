@@ -130,52 +130,6 @@ const getProductById = async (req, res) => {
     }
 };
 
-// // ✅ Update Product
-// const updateProduct = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         let updateData = { ...req.body };
-
-//         if (req.files) {
-//             if (req.files.product_image_collection) {
-//                 updateData.product_image_collection = req.files.product_image_collection.map(
-//                     (file) => file.filename
-//                 );
-//             }
-//             if (req.files.product_lens_image1 && req.files.product_lens_image1[0]) {
-//                 updateData.product_lens_image1 = req.files.product_lens_image1[0].filename;
-//             }
-//             if (req.files.product_lens_image2 && req.files.product_lens_image2[0]) {
-//                 updateData.product_lens_image2 = req.files.product_lens_image2[0].filename;
-//             }
-//         }
-
-//         const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
-//             new: true,
-//             runValidators: true,
-//         });
-
-//         if (!updatedProduct) {
-//             return res.status(404).json({
-//                 success: false,
-//                 message: "Product not found",
-//             });
-//         }
-
-//         return res.status(200).json({
-//             success: true,
-//             message: "Product updated successfully",
-//             data: updatedProduct,
-//         });
-//     } catch (error) {
-//         return res.status(500).json({
-//             success: false,
-//             message: "Error while updating product",
-//             error: error.message,
-//         });
-//     }
-// };
-
 
 // ✅ Update Product
 const updateProduct = async (req, res) => {

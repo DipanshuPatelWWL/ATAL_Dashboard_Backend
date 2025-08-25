@@ -12,7 +12,6 @@ exports.addCategory = async (req, res) => {
         .map((s) => s.trim())
         .filter(Boolean);
     }
-
     const newCategory = new Category({ categoryName, subCategoryNames });
     await newCategory.save();
 
@@ -21,7 +20,6 @@ exports.addCategory = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
 
 // Fetch all categories
 exports.getCategories = async (req, res) => {
