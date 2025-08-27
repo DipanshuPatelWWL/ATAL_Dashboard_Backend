@@ -7,10 +7,13 @@ const prodcutRoutes = require("./routes/product-routes");
 const review = require('./routes/review-route')
 const serviceRoutes = require("./routes/service-route");
 const subcategoryroute = require("./routes/subcategory-route")
-const authRoutes = require("./routes/auth-routes")
 const eyeCheckRoutes = require("./routes/eyeCheck-routes")
 const vendorRoutes = require("./routes/vendor-route");
+const customerRegistrationRoutes = require("./routes/Customer-register-routes")
+const loginRoute = require("./routes/login-routes")
+const adminLogin = require("./routes/auth-routes.js")
 const app = express();
+const { default: helmet } = require('helmet');
 require("dotenv").config();
 const database = require("./config/config")
 
@@ -34,6 +37,8 @@ app.use(cors(corsOptions));
 database.connect();
 
 app.use(express.json());
+//extra security
+app.use(helmet());
 const path = require('path');
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -51,9 +56,11 @@ app.use("/api", prodcutRoutes);
 app.use("/api", serviceRoutes);
 app.use("/api", subcategoryroute)
 app.use('/api', review)
-app.use("/api", authRoutes)
 app.use("/api", eyeCheckRoutes)
 app.use("/api", vendorRoutes);
+app.use("/api", customerRegistrationRoutes)
+app.use("/api", loginRoute)
+app.use("/api",adminLogin)
 
 app.listen(4000, () => {
   console.log("server start on Port : 4000");
