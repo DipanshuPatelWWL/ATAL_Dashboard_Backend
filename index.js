@@ -13,7 +13,6 @@ const customerRegistrationRoutes = require("./routes/Customer-register-routes")
 const loginRoute = require("./routes/login-routes")
 // const adminLogin = require("./routes/auth-routes.js")
 const app = express();
-const { default: helmet } = require('helmet');
 require("dotenv").config();
 const database = require("./config/config")
 
@@ -38,7 +37,6 @@ database.connect();
 
 app.use(express.json());
 //extra security
-app.use(helmet());
 const path = require('path');
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
