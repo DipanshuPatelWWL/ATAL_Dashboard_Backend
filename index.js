@@ -9,6 +9,7 @@ const serviceRoutes = require("./routes/service-route");
 const subcategoryroute = require("./routes/subcategory-route")
 const authRoutes = require("./routes/auth-routes")
 const eyeCheckRoutes = require("./routes/eyeCheck-routes")
+const vendorRoutes = require("./routes/vendor-route");
 const app = express();
 require("dotenv").config();
 const database = require("./config/config")
@@ -52,6 +53,7 @@ app.use("/api", subcategoryroute)
 app.use('/api', review)
 app.use("/api", authRoutes)
 app.use("/api", eyeCheckRoutes)
+app.use("/api", vendorRoutes);
 
 app.listen(4000, () => {
   console.log("server start on Port : 4000");
