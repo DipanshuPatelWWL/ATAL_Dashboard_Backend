@@ -11,7 +11,7 @@ const eyeCheckRoutes = require("./routes/eyeCheck-routes")
 const vendorRoutes = require("./routes/vendor-route");
 const customerRegistrationRoutes = require("./routes/Customer-register-routes")
 const loginRoute = require("./routes/login-routes")
-const adminLogin = require("./routes/auth-routes.js")
+// const adminLogin = require("./routes/auth-routes.js")
 const app = express();
 const { default: helmet } = require('helmet');
 require("dotenv").config();
@@ -60,7 +60,7 @@ app.use("/api", eyeCheckRoutes)
 app.use("/api", vendorRoutes);
 app.use("/api", customerRegistrationRoutes)
 app.use("/api", loginRoute)
-app.use("/api",adminLogin)
+// app.use("/api",adminLogin)
 
 app.listen(4000, () => {
   console.log("server start on Port : 4000");
