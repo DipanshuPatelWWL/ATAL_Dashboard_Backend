@@ -8,9 +8,11 @@ const review = require('./routes/review-route')
 const serviceRoutes = require("./routes/service-route");
 const subcategoryroute = require("./routes/subcategory-route")
 const eyeCheckRoutes = require("./routes/eyeCheck-routes")
+const vendorRoutes = require("./routes/vendor-route");
 const customerRegistrationRoutes = require("./routes/Customer-register-routes")
 const loginRoute = require("./routes/login-routes")
 const adminRoute = require("./routes/auth-routes")
+
 const app = express();
 const { default: helmet } = require('helmet');
 require("dotenv").config();
@@ -56,6 +58,7 @@ app.use("/api", serviceRoutes);
 app.use("/api", subcategoryroute)
 app.use('/api', review)
 app.use("/api", eyeCheckRoutes)
+app.use("/api", vendorRoutes);
 app.use("/api", customerRegistrationRoutes)
 app.use("/api", loginRoute)
 app.use("/api", adminRoute)
