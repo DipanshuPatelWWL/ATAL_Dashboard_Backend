@@ -14,7 +14,6 @@ const loginRoute = require("./routes/login-routes")
 const adminRoute = require("./routes/auth-routes")
 
 const app = express();
-const { default: helmet } = require('helmet');
 require("dotenv").config();
 const database = require("./config/config")
 
@@ -38,8 +37,7 @@ app.use(cors(corsOptions));
 database.connect();
 
 app.use(express.json());
-//extra security
-app.use(helmet());
+
 const path = require('path');
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
