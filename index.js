@@ -35,6 +35,7 @@ app.use(cors(corsOptions));
 database.connect();
 
 app.use(express.json());
+//extra security
 app.use(helmet());
 const path = require('path');
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
