@@ -11,7 +11,8 @@ const eyeCheckRoutes = require("./routes/eyeCheck-routes")
 const vendorRoutes = require("./routes/vendor-route");
 const customerRegistrationRoutes = require("./routes/Customer-register-routes")
 const loginRoute = require("./routes/login-routes")
-// const adminLogin = require("./routes/auth-routes.js")
+const adminRoute = require("./routes/auth-routes")
+
 const app = express();
 require("dotenv").config();
 const database = require("./config/config")
@@ -36,7 +37,11 @@ app.use(cors(corsOptions));
 database.connect();
 
 app.use(express.json());
+<<<<<<< HEAD
 //extra security
+=======
+
+>>>>>>> 059ab9af41827a5c881e5f2763b069c03a3bfc11
 const path = require('path');
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -58,7 +63,7 @@ app.use("/api", eyeCheckRoutes)
 app.use("/api", vendorRoutes);
 app.use("/api", customerRegistrationRoutes)
 app.use("/api", loginRoute)
-// app.use("/api",adminLogin)
+app.use("/api", adminRoute)
 
 app.listen(4000, () => {
   console.log("server start on Port : 4000");
