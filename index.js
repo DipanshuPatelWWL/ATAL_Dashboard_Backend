@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const faq = require('./routes/faq-Routes')
 const categoryRoutes = require("./routes/category-route");
@@ -29,7 +28,7 @@ const corsOptions = {
   },
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true // only if you're using cookies or sessions,
+  credentials: true
 };
 app.use(cors(corsOptions));
 
