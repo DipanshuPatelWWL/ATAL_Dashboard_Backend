@@ -37,7 +37,7 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(null, false); // reject silently
+        callback(null, false);
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
@@ -79,7 +79,7 @@ app.use("/api", wishlistRoute);
 app.use("/api", testimonialRoutes);
 app.use("/api", eyewearTipsRouter);
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 // Start server
 app.listen(PORT, () => {
