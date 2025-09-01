@@ -79,7 +79,7 @@ app.use("/api", wishlistRoute);
 app.use("/api", testimonialRoutes);
 app.use("/api", eyewearTipsRouter);
 
-const PORT = process.env.PORT || 4000;
+const PORT = 4000;
 
 // Start server
 app.listen(PORT, () => {
