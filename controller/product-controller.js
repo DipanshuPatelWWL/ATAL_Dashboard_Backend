@@ -34,7 +34,7 @@ const getProdcutByCategoryname = async (req, res) => {
     }
 };
 
-// ✅ Add Product
+// Add Product
 const addProduct = async (req, res) => {
     try {
         let productData = { ...req.body };
@@ -71,7 +71,7 @@ const addProduct = async (req, res) => {
     }
 };
 
-// ✅ Get All Products (search + filter)
+//  Get All Products (search + filter)
 const getAllProducts = async (req, res) => {
     try {
         const { search, category, subCategory } = req.query;
@@ -104,7 +104,7 @@ const getAllProducts = async (req, res) => {
     }
 };
 
-// ✅ Get Product by ID
+//  Get Product by ID
 const getProductById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -131,7 +131,7 @@ const getProductById = async (req, res) => {
 };
 
 
-// ✅ Update Product
+//  Update Product
 const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
@@ -196,7 +196,7 @@ const updateProduct = async (req, res) => {
 };
 
 
-// ✅ Delete Product
+//  Delete Product
 const deleteProduct = async (req, res) => {
     try {
         const { id } = req.params;
@@ -222,6 +222,21 @@ const deleteProduct = async (req, res) => {
     }
 };
 
+
+
+// ✅ Get products by categoryId + subCategoryId
+const getProductsByCategoryAndSub = async (req, res) => {
+    try {
+        const { categoryId, subCategoryId } = req.params;
+        const products = await Product.find({ categoryId, subCategoryId });
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+
+
 module.exports = {
     addProduct,
     getAllProducts,
@@ -229,5 +244,6 @@ module.exports = {
     updateProduct,
     deleteProduct,
     getProdcutByCategoryname,
-    getProductByid
+    getProductByid,
+    getProductsByCategoryAndSub
 };

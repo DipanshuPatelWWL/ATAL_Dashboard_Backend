@@ -1,4 +1,4 @@
-const SubCategory =require("../model/subcategory-model")
+const SubCategory = require("../model/subcategory-model")
 
 exports.updateSubcategory = async (req, res) => {
   try {
@@ -56,7 +56,7 @@ exports.addsubcategory = async (req, res) => {
     let subCategoryData = { ...req.body };
 
     if (req.file) {
-      subCategoryData.image = req.file.filename; 
+      subCategoryData.image = req.file.filename;
     }
 
     const subcategory = new SubCategory(subCategoryData);
