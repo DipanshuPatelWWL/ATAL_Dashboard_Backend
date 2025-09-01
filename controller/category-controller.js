@@ -1,4 +1,5 @@
 const Category = require("../model/category-model");
+const SubCategory = require("../model/subcategory-model");
 
 // Add new category
 exports.addCategory = async (req, res) => {
@@ -80,5 +81,42 @@ exports.updateCategory = async (req, res) => {
       message: "Failed to update category",
       error: error.message,
     });
+  }
+};
+
+
+
+exports.getAllCategoriesWithSub = async (req, res) => {
+  try {
+    const categories = await Category.find();
+
+    const result = await Promise.all(
+      categories.map(async (cat) => {
+        const subs = await SubCategory.find({ categoryId: cat._id });
+        return { ...cat.toObject(), subCategories: subs };
+      })
+    );
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+// Get category by ID
+exports.getCategoryById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const category = await Category.findById(id);
+
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    res.status(200).json(category);
+  } catch (error) {
+    console.error("Error fetching category by ID:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

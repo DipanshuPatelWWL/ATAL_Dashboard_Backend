@@ -222,6 +222,21 @@ const deleteProduct = async (req, res) => {
     }
 };
 
+
+
+// ✅ Get products by categoryId + subCategoryId
+const getProductsByCategoryAndSub = async (req, res) => {
+    try {
+        const { categoryId, subCategoryId } = req.params;
+        const products = await Product.find({ categoryId, subCategoryId });
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+
+
 module.exports = {
     addProduct,
     getAllProducts,
@@ -229,5 +244,6 @@ module.exports = {
     updateProduct,
     deleteProduct,
     getProdcutByCategoryname,
-    getProductByid
+    getProductByid,
+    getProductsByCategoryAndSub
 };
