@@ -1,7 +1,9 @@
-const express = require("express");
-const path = require("path");
-require("dotenv").config();
 
+const express = require('express');
+require("dotenv").config();
+const path = require("path");
+
+// *****************routes****************
 const faq = require("./routes/faq-Routes");
 const categoryRoutes = require("./routes/category-route");
 const prodcutRoutes = require("./routes/product-routes");
