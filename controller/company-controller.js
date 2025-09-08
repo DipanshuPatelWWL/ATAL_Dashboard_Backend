@@ -1,44 +1,5 @@
 const Company = require("../model/compnay-model");
 
-// Create new company
-exports.createCompany = async (req, res) => {
-  try {
-    const {
-      companyName,
-      legalEntity,
-      networkPayerId,
-      eftRemittance,
-      providerName,
-      providerNumber,
-      providerEmail,
-      claim,
-      serviceStandards,
-      agreementAccepted,
-    } = req.body;
-
-    const newCompany = new Company({
-      companyName,
-      legalEntity,
-      networkPayerId,
-      eftRemittance,
-      providerName,
-      providerNumber,
-      providerEmail,
-      claim,
-      serviceStandards,
-      agreementAccepted: agreementAccepted === "true",
-      signedAgreement: req.files?.signedAgreement?.[0]?.path || null,
-      licenseProof: req.files?.licenseProof?.[0]?.path || null,
-      voidCheque: req.files?.voidCheque?.[0]?.path || null,
-    });
-
-    await newCompany.save();
-    res.status(201).json({ success: true, company: newCompany });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-};
-
 // Get all companies
 exports.getCompanies = async (req, res) => {
   try {

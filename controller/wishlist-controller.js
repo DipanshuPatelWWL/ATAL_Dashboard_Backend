@@ -20,16 +20,6 @@ exports.addToWishlist = async (req, res) => {
     }
 };
 
-// Get user's wishlist
-// exports.getWishlist = async (req, res) => {
-//     try {
-//         const wishlist = await Wishlist.findOne({ userId: req.params.userId }).populate("products.productId");
-//         res.status(200).json(wishlist);
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// };
-
 
 // GET /api/wishlist/:userId
 exports.getWishlist = async (req, res) => {

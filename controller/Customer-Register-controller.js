@@ -58,4 +58,34 @@ const registerCustomer = async (req, res) => {
     }
 };
 
-module.exports = { registerCustomer };
+
+// Get Customer by ID
+const fetchCustomerById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const customer = await Customer.findById(id);
+
+        if (!customer) {
+            return res.status(404).json({
+                success: false,
+                message: "Customer not found",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: customer,
+        });
+    } catch (error) {
+        console.error("Error fetching customer:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch customer",
+            error: error.message,
+        });
+    }
+};
+
+
+module.exports = { registerCustomer, fetchCustomerById };

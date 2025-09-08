@@ -224,7 +224,7 @@ const deleteProduct = async (req, res) => {
 
 
 
-// ✅ Get products by categoryId + subCategoryId
+// Get products by categoryId + subCategoryId
 const getProductsByCategoryAndSub = async (req, res) => {
     try {
         const { categoryId, subCategoryId } = req.params;

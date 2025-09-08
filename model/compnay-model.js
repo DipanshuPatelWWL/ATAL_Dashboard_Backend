@@ -1,46 +1,53 @@
 const mongoose = require("mongoose");
 
 const Company = new mongoose.Schema({
-    companyName:{
-        type:String,
+    companyName: {
+        type: String,
     },
-    legalEntity:{
-        type:String,
+    companyEmail: {
+        type: String
     },
-    networkPayerId:{
-        type:String
+    registrationNumber: {
+        type: String
     },
-    efRemittance:{
-        type:String
+    userId: { type: String },
+    legalEntity: {
+        type: String,
     },
-    providerName:{
-        type:String
+    networkPayerId: {
+        type: String
     },
-    providerNumber:{
-        type:String
+    efRemittance: {
+        type: String
     },
-    providerEmail:{
-        type:String
+    providerName: {
+        type: String
     },
-    claim:{
-        type:[String],
-        enum:["EDI","Portal","Email","Fax"],
+    providerNumber: {
+        type: String
     },
-    signedAgreement:{
-        type:String,
+    providerEmail: {
+        type: String
     },
-    licenseProof:{
-        type:String
+    claim: {
+        type: [String],
+        enum: ["EDI", "Portal", "Email", "Fax"],
     },
-    voidCheque:{
-        type:String
+    signedAgreement: {
+        type: String,
     },
-    serviceStandards:{
-        type:String
+    licenseProof: {
+        type: String
     },
-    agreementAccepted:{
-        type:Boolean,
-        default:false,
+    voidCheque: {
+        type: String
+    },
+    serviceStandards: {
+        type: String
+    },
+    agreementAccepted: {
+        type: Boolean,
+        default: false,
     }
 },
     { timestamps: true }

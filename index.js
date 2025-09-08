@@ -1,4 +1,3 @@
-
 const express = require('express');
 require("dotenv").config();
 const path = require("path");
@@ -11,14 +10,15 @@ const review = require("./routes/review-route");
 const serviceRoutes = require("./routes/service-route");
 const subcategoryroute = require("./routes/subcategory-route");
 const eyeCheckRoutes = require("./routes/eyeCheck-routes");
-// const vendorRoutes = require("./routes/vendor-route");
+const vendorRoutes = require("./routes/vendor-route");
 const customerRegistrationRoutes = require("./routes/Customer-register-routes");
 const loginRoute = require("./routes/login-routes");
 const adminRoute = require("./routes/auth-routes");
 const wishlistRoute = require("./routes/wishlist-route");
 const testimonialRoutes = require("./routes/testimonial-route");
 const eyewearTipsRouter = require("./routes/eyewearTips-route");
-
+const inquiryRoutes = require("./routes/inquiry-routes");
+const userRoutes = require("./routes/user-route");
 const database = require("./config/config");
 const cors = require("cors");
 
@@ -73,13 +73,15 @@ app.use("/api", serviceRoutes);
 app.use("/api", subcategoryroute);
 app.use("/api", review);
 app.use("/api", eyeCheckRoutes);
-// app.use("/api", vendorRoutes);
+app.use("/api", vendorRoutes);
 app.use("/api", customerRegistrationRoutes);
 app.use("/api", loginRoute);
 app.use("/api", adminRoute);
 app.use("/api", wishlistRoute);
 app.use("/api", testimonialRoutes);
 app.use("/api", eyewearTipsRouter);
+app.use("/api", inquiryRoutes);
+app.use("/api", userRoutes);
 
 const PORT = process.env.PORT || 4000;
 

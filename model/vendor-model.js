@@ -7,13 +7,15 @@ const vendorSchema = new mongoose.Schema(
       enum: ["supplier", "lab", "brand"],
       required: true,
     },
-    companyName: { type: String, required: true },
+    companyName: { type: String },
     operatingName: String,
     businessNumber: String,
 
+    userId: { type: String },
+
     contactName: String,
     contactTitle: String,
-    contactEmail: { type: String, required: true },
+    contactEmail: { type: String, required: true, index: true },
     contactPhone: String,
 
     address1: String,
@@ -40,6 +42,7 @@ const vendorSchema = new mongoose.Schema(
     swift: String,
     iban: String,
     remittanceEmail: String,
+
     certifications: {
       type: [String],
       default: [],
@@ -48,7 +51,18 @@ const vendorSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+
     termsAccepted: { type: Boolean, default: false },
+
+    //  Workflow fields
+    status: {
+      type: String,
+      enum: ["open", "replied", "closed"],
+      default: "open",
+    },
+    adminResponse: { type: String, default: "" },
+
+    ip: String, // to track spammy users
   },
   { timestamps: true }
 );

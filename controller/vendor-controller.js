@@ -1,51 +1,71 @@
 const Vendor = require("../model/vendor-model");
 
-
-exports.createVendor = async (req, res) => {
+// Update Vendor Profile
+exports.updateProfile = async (req, res) => {
   try {
+    // find vendor by userId from JWT
+    const vendor = await Vendor.findOne({ userId: req.user.id });
+    if (!vendor) {
+      return res.status(404).json({ message: "Vendor not found" });
+    }
 
-    // Extract filenames properly
-    const certifications =
-      req.files?.certifications?.map((file) => file.filename) || [];
-    const certificates =
-      req.files?.certificates?.map((file) => file.filename) || [];
+    const updateData = { ...req.body };
 
-    const vendor = new Vendor({
-      ...req.body,
-      certifications,
-      certificates,
+    // Prevent updating restricted fields
+    const restrictedFields = [
+      "status",
+      "adminResponse",
+      "ip",
+      "termsAccepted",
+      "createdAt",
+      "updatedAt",
+    ];
+    restrictedFields.forEach((field) => delete updateData[field]);
+
+    // Handle uploaded files
+    if (req.files) {
+      if (req.files.certifications) {
+        updateData.certifications = req.files.certifications.map(
+          (file) => file.filename
+        );
+      }
+      if (req.files.certificates) {
+        updateData.certificates = req.files.certificates.map(
+          (file) => file.filename
+        );
+      }
+    }
+
+    const updatedVendor = await Vendor.findByIdAndUpdate(
+      vendor._id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      vendor: updatedVendor,
     });
-
-    await vendor.save();
-
-    res.status(201).json({ success: true, vendor });
-  } catch (err) {
-    console.error("Error creating vendor:", err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error creating vendor",
-        error: err.message,
-      });
+  } catch (error) {
+    console.error("Update Profile Error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
 
 // Get all vendors
 exports.getVendors = async (req, res) => {
   try {
     const vendors = await Vendor.find();
-    res.json({ success: true, vendors });
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Error fetching vendors" });
+    res.status(200).json(vendors);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-// Get single vendor
+// Get vendor by ID
 exports.getVendorById = async (req, res) => {
   try {
-    const vendor = await Vendor.findById(req.params.id);
+    let vendor = await Vendor.findOne({ userId: req.params.id });
     if (!vendor) return res.status(404).json({ success: false, message: "Vendor not found" });
     res.json({ success: true, vendor });
   } catch (err) {
@@ -53,34 +73,15 @@ exports.getVendorById = async (req, res) => {
   }
 };
 
-// Update vendor
-exports.updateVendor = async (req, res) => {
-  try {
-    const fileNames = req.files ? req.files.map((file) => file.filename) : [];
-    const updatedData = {
-      ...req.body,
-    };
-
-    if (fileNames.length > 0) {
-      updatedData.$push = { documents: { $each: fileNames } };
-    }
-
-    const vendor = await Vendor.findByIdAndUpdate(req.params.id, updatedData, { new: true });
-    if (!vendor) return res.status(404).json({ success: false, message: "Vendor not found" });
-
-    res.json({ success: true, vendor });
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Error updating vendor" });
-  }
-};
-
 // Delete vendor
 exports.deleteVendor = async (req, res) => {
   try {
-    const vendor = await Vendor.findByIdAndDelete(req.params.id);
-    if (!vendor) return res.status(404).json({ success: false, message: "Vendor not found" });
-    res.json({ success: true, message: "Vendor deleted" });
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Error deleting vendor" });
+    const deletedVendor = await Vendor.findByIdAndDelete(req.params.id);
+    if (!deletedVendor)
+      return res.status(404).json({ message: "Vendor not found" });
+
+    res.status(200).json({ message: "Vendor deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

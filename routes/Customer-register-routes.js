@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { registerCustomer } = require("../controller/Customer-Register-controller");
-const upload = require("../middleware/multer"); // 👈 your multer config file
+const { registerCustomer, fetchCustomerById } = require("../controller/Customer-Register-controller");
+const upload = require("../middleware/multer");
 
 // Register route (with prescription upload)
 router.post(
@@ -10,5 +10,6 @@ router.post(
     upload.single("prescriptionFile"),
     registerCustomer
 );
+router.get("/customer/:id", fetchCustomerById);
 
 module.exports = router;
